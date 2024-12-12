@@ -39,7 +39,11 @@ export function SupplyChainMap() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {regions.map((region) => (
-              <MapMarker key={region.id} region={region} />
+              <MapMarker 
+                key={region.id} 
+                region={region} 
+                position={[region.coordinates.y, region.coordinates.x]}
+              />
             ))}
           </MapContainer>
         </div>
