@@ -1,13 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, TrendingUp, Users, Building2 } from "lucide-react";
+import { MapPin, TrendingUp, Users, Building2, ArrowUpIcon, ArrowDownIcon, ArrowRightIcon } from "lucide-react";
 
 export function SwissDetails() {
   const swissRegions = [
     {
       name: "Graubünden & Emmental",
       products: [
-        "Alpkäse-Produktion (15'000 Tonnen/Jahr)",
-        "Traditionelle Käseherstellung (25'000 Tonnen/Jahr)"
+        {
+          name: "Alpkäse-Produktion",
+          amount: "15'000 Tonnen/Jahr",
+          productionTrend: "up",
+          consumptionTrend: "stable"
+        },
+        {
+          name: "Traditionelle Käseherstellung",
+          amount: "25'000 Tonnen/Jahr",
+          productionTrend: "up",
+          consumptionTrend: "up"
+        }
       ],
       type: "Milchprodukte",
       marketFactors: {
@@ -24,8 +34,18 @@ export function SwissDetails() {
     {
       name: "Mittelland, Waadt & Freiburg",
       products: [
-        "Hauptanbaugebiet für Weizen (300'000 Tonnen/Jahr)",
-        "Bedeutende Getreideflächen (180'000 Tonnen/Jahr)"
+        {
+          name: "Hauptanbaugebiet für Weizen",
+          amount: "300'000 Tonnen/Jahr",
+          productionTrend: "stable",
+          consumptionTrend: "up"
+        },
+        {
+          name: "Bedeutende Getreideflächen",
+          amount: "180'000 Tonnen/Jahr",
+          productionTrend: "down",
+          consumptionTrend: "stable"
+        }
       ],
       type: "Getreide",
       marketFactors: {
@@ -42,9 +62,24 @@ export function SwissDetails() {
     {
       name: "St. Gallen, Luzern & Bern",
       products: [
-        "Schweinezucht (250'000 Tonnen/Jahr)",
-        "Geflügelproduktion (100'000 Tonnen/Jahr)",
-        "Rinderhaltung (135'000 Tonnen/Jahr)"
+        {
+          name: "Schweinezucht",
+          amount: "250'000 Tonnen/Jahr",
+          productionTrend: "down",
+          consumptionTrend: "down"
+        },
+        {
+          name: "Geflügelproduktion",
+          amount: "100'000 Tonnen/Jahr",
+          productionTrend: "up",
+          consumptionTrend: "up"
+        },
+        {
+          name: "Rinderhaltung",
+          amount: "135'000 Tonnen/Jahr",
+          productionTrend: "stable",
+          consumptionTrend: "down"
+        }
       ],
       type: "Fleisch",
       marketFactors: {
@@ -61,9 +96,24 @@ export function SwissDetails() {
     {
       name: "Seeland, Wallis & Thurgau",
       products: [
-        "Gemüseanbau (320'000 Tonnen/Jahr)",
-        "Spezialkulturen (45'000 Tonnen/Jahr)",
-        "Gewächshäuser (80'000 Tonnen/Jahr)"
+        {
+          name: "Gemüseanbau",
+          amount: "320'000 Tonnen/Jahr",
+          productionTrend: "up",
+          consumptionTrend: "up"
+        },
+        {
+          name: "Spezialkulturen",
+          amount: "45'000 Tonnen/Jahr",
+          productionTrend: "stable",
+          consumptionTrend: "up"
+        },
+        {
+          name: "Gewächshäuser",
+          amount: "80'000 Tonnen/Jahr",
+          productionTrend: "up",
+          consumptionTrend: "stable"
+        }
       ],
       type: "Gemüse",
       marketFactors: {
@@ -80,9 +130,24 @@ export function SwissDetails() {
     {
       name: "Wallis, Thurgau & Waadt",
       products: [
-        "Aprikosen (4'500 Tonnen/Jahr)",
-        "Äpfel (125'000 Tonnen/Jahr)",
-        "Diverse Obstkulturen (90'000 Tonnen/Jahr)"
+        {
+          name: "Aprikosen",
+          amount: "4'500 Tonnen/Jahr",
+          productionTrend: "stable",
+          consumptionTrend: "up"
+        },
+        {
+          name: "Äpfel",
+          amount: "125'000 Tonnen/Jahr",
+          productionTrend: "down",
+          consumptionTrend: "stable"
+        },
+        {
+          name: "Diverse Obstkulturen",
+          amount: "90'000 Tonnen/Jahr",
+          productionTrend: "stable",
+          consumptionTrend: "up"
+        }
       ],
       type: "Früchte",
       marketFactors: {
@@ -97,6 +162,19 @@ export function SwissDetails() {
       }
     }
   ];
+
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case 'up':
+        return <ArrowUpIcon className="h-4 w-4 text-green-600" />;
+      case 'down':
+        return <ArrowDownIcon className="h-4 w-4 text-red-600" />;
+      case 'stable':
+        return <ArrowRightIcon className="h-4 w-4 text-blue-600" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <Card className="mt-6">
@@ -120,9 +198,23 @@ export function SwissDetails() {
                 <div className="space-y-4">
                   <div>
                     <h5 className="text-sm font-medium mb-1">Produkte</h5>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
+                    <ul className="space-y-2">
                       {region.products.map((product) => (
-                        <li key={product}>{product}</li>
+                        <li key={product.name} className="text-sm">
+                          <div className="flex items-center justify-between">
+                            <span>{product.name} ({product.amount})</span>
+                            <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-1" title="Produktionstrend">
+                                <TrendingUp className="h-3 w-3 text-gray-500" />
+                                {getTrendIcon(product.productionTrend)}
+                              </div>
+                              <div className="flex items-center gap-1" title="Verbrauchstrend">
+                                <Users className="h-3 w-3 text-gray-500" />
+                                {getTrendIcon(product.consumptionTrend)}
+                              </div>
+                            </div>
+                          </div>
+                        </li>
                       ))}
                     </ul>
                   </div>
