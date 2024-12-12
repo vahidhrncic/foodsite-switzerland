@@ -24,7 +24,6 @@ const parser = new Parser();
 
 const fetchNews = async ({ pageParam = 0 }): Promise<NewsItem[]> => {
   try {
-    // Fetch RSS feeds
     const feedPromises = RSS_FEEDS.map(async (url) => {
       try {
         const feed = await parser.parseURL(url);
@@ -33,7 +32,6 @@ const fetchNews = async ({ pageParam = 0 }): Promise<NewsItem[]> => {
           description: item.contentSnippet || item.content || '',
           publishedAt: item.pubDate || new Date().toISOString(),
           url: item.link || '',
-          // Categorize based on content analysis
           category: determineCategory(item.title || '', item.contentSnippet || ''),
           priority: determinePriority(item.title || '', item.contentSnippet || '')
         }));
@@ -46,7 +44,6 @@ const fetchNews = async ({ pageParam = 0 }): Promise<NewsItem[]> => {
     const allItems = await Promise.all(feedPromises);
     const flattenedItems = allItems.flat();
     
-    // Sort by date and paginate
     const sortedItems = flattenedItems.sort((a, b) => 
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
@@ -101,6 +98,7 @@ export function NewsFeed() {
   } = useInfiniteQuery({
     queryKey: ['food-news'],
     queryFn: fetchNews,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === 0 ? undefined : allPages.length;
     },

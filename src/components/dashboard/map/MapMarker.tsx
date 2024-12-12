@@ -1,35 +1,27 @@
-import { Marker, Popup } from 'react-leaflet';
-import { Region } from './types';
+import { Marker } from 'react-leaflet';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import { MarkerPopup } from './components/MarkerPopup';
+import { Region } from './types';
 
 interface MapMarkerProps {
   region: Region;
+  position: [number, number];
 }
 
-export const MapMarker = ({ region }: MapMarkerProps) => {
-  const position: [number, number] = [region.coordinates.y, region.coordinates.x];
-
+export const MapMarker = ({ region, position }: MapMarkerProps) => {
   const customIcon = new L.DivIcon({
-    className: '',
-    html: `<div style="background-color: ${
-      region.status === 'good' ? '#86efac' : 
-      region.status === 'warning' ? '#fde047' : 
-      '#fca5a5'
-    }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white;"></div>`,
+    className: 'custom-div-icon',
+    html: `<div class="marker-pin"></div>`,
     iconSize: L.point(30, 30),
-    iconAnchor: L.point(15, 15)
+    iconAnchor: L.point(15, 30),
   });
 
   return (
     <Marker 
-      position={position}
+      position={position} 
       icon={customIcon}
     >
-      <Popup>
-        <MarkerPopup region={region} />
-      </Popup>
+      <MarkerPopup region={region} />
     </Marker>
   );
 };
