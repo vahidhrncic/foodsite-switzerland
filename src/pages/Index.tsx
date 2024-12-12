@@ -1,5 +1,6 @@
 import { RealtimeMetrics } from "@/components/dashboard/RealtimeMetrics";
 import { SupplyChainMap } from "@/components/dashboard/SupplyChainMap";
+import { SwissDetails } from "@/components/dashboard/SwissDetails";
 import { NewsFeed } from "@/components/dashboard/NewsFeed";
 
 const Index = () => {
@@ -20,6 +21,7 @@ const Index = () => {
           <SupplyChainMap />
           <NewsFeed />
         </div>
+        <SwissDetails />
       </div>
     </div>
   );
