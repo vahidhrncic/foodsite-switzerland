@@ -7,10 +7,10 @@ const Index = () => {
     <div className="container mx-auto py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Supply Chain Dashboard
+          Supply Chain Intelligence
         </h1>
         <p className="text-gray-600">
-          Monitor and optimize your supply chain operations in real-time
+          Real-time monitoring and analysis of global food supply chains
         </p>
       </div>
 
