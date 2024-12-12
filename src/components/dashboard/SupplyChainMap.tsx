@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Wheat } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 
 interface Resource {
   name: string;
@@ -88,6 +89,16 @@ const regions: Region[] = [
   }
 ];
 
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px'
+};
+
+const center = {
+  lat: 20,
+  lng: 0
+};
+
 const getAvailabilityColor = (availability: string) => {
   switch (availability) {
     case 'high':
@@ -104,6 +115,14 @@ const getAvailabilityColor = (availability: string) => {
 export function SupplyChainMap() {
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
 
+  const markers = regions.map(region => ({
+    position: {
+      lat: region.coordinates.y,
+      lng: region.coordinates.x
+    },
+    region
+  }));
+
   return (
     <Card className="col-span-3">
       <CardHeader>
@@ -113,86 +132,73 @@ export function SupplyChainMap() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="relative w-full">
-          <div className="aspect-[16/9] bg-slate-100 rounded-lg p-4 relative overflow-hidden">
-            {/* World Map Background */}
-            <div 
-              className="absolute inset-0 bg-[url('https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.svg')] bg-no-repeat bg-contain bg-center opacity-30"
-              style={{ 
-                transform: 'scale(1.2)',
-                filter: 'grayscale(1)'
+        <div className="w-full rounded-lg overflow-hidden">
+          <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={center}
+              zoom={2}
+              options={{
+                styles: [
+                  {
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                  }
+                ]
               }}
-            />
-            
-            {/* Map Markers */}
-            {regions.map((region) => (
-              <div
-                key={region.id}
-                className="absolute cursor-pointer group"
-                style={{
-                  left: `${region.coordinates.x}%`,
-                  top: `${region.coordinates.y}%`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-                onClick={() => setSelectedRegion(region)}
-              >
-                <div className="p-2 bg-primary rounded-full hover:scale-110 transition-transform">
-                  <Wheat className="h-4 w-4 text-white" />
-                </div>
-                <div className="hidden group-hover:block absolute z-10 bg-white p-3 rounded-lg shadow-lg -translate-x-1/2 mt-2 w-48">
-                  <h4 className="font-semibold">{region.name}</h4>
-                  <div className="mt-2">
-                    <p className="text-sm font-medium">Key Resources:</p>
-                    <ul className="text-sm text-muted-foreground">
-                      {region.resources.map((resource) => (
-                        <li key={resource.name} className="mt-1">
-                          {resource.name}
-                          <Badge className={`ml-2 ${getAvailabilityColor(resource.availability)}`}>
-                            {resource.availability}
-                          </Badge>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {selectedRegion && (
-            <div className="mt-4 p-4 border rounded-lg">
-              <div className="flex justify-between items-start">
-                <h3 className="font-semibold text-lg">{selectedRegion.name}</h3>
-                {selectedRegion.weatherConditions && (
-                  <Badge variant="outline" className="ml-2">
-                    {selectedRegion.weatherConditions}
-                  </Badge>
-                )}
-              </div>
-              <div className="mt-4 space-y-4">
-                {selectedRegion.resources.map((resource) => (
-                  <div key={resource.name} className="border-b pb-3 last:border-0">
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-medium">{resource.name}</h4>
-                      <Badge className={getAvailabilityColor(resource.availability)}>
-                        {resource.availability}
+            >
+              {markers.map((marker, index) => (
+                <Marker
+                  key={index}
+                  position={marker.position}
+                  onClick={() => setSelectedRegion(marker.region)}
+                  icon={{
+                    path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z",
+                    fillColor: "#1E40AF",
+                    fillOpacity: 1,
+                    strokeWeight: 0,
+                    scale: 1.5
+                  }}
+                />
+              ))}
+
+              {selectedRegion && (
+                <InfoWindow
+                  position={{
+                    lat: selectedRegion.coordinates.y,
+                    lng: selectedRegion.coordinates.x
+                  }}
+                  onCloseClick={() => setSelectedRegion(null)}
+                >
+                  <div className="p-2 max-w-xs">
+                    <h3 className="font-semibold text-lg">{selectedRegion.name}</h3>
+                    {selectedRegion.weatherConditions && (
+                      <Badge variant="outline" className="mt-1">
+                        {selectedRegion.weatherConditions}
                       </Badge>
-                    </div>
-                    <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-muted-foreground">Production:</span>
-                        <span className="ml-2">{resource.production}</span>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Consumption:</span>
-                        <span className="ml-2">{resource.consumption}</span>
-                      </div>
+                    )}
+                    <div className="mt-2">
+                      {selectedRegion.resources.map((resource) => (
+                        <div key={resource.name} className="mt-2">
+                          <div className="flex justify-between items-center">
+                            <span className="font-medium">{resource.name}</span>
+                            <Badge className={getAvailabilityColor(resource.availability)}>
+                              {resource.availability}
+                            </Badge>
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            <div>Production: {resource.production}</div>
+                            <div>Consumption: {resource.consumption}</div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
+                </InfoWindow>
+              )}
+            </GoogleMap>
+          </LoadScript>
         </div>
       </CardContent>
     </Card>

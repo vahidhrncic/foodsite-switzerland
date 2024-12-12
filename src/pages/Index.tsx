@@ -4,9 +4,9 @@ import { NewsFeed } from "@/components/dashboard/NewsFeed";
 
 const Index = () => {
   return (
-    <div className="container mx-auto py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+    <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
           Supply Chain Intelligence
         </h1>
         <p className="text-gray-600">
@@ -16,7 +16,7 @@ const Index = () => {
 
       <div className="space-y-6">
         <RealtimeMetrics />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           <SupplyChainMap />
           <NewsFeed />
         </div>
