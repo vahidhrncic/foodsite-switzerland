@@ -19,7 +19,7 @@ const fetchNews = async (): Promise<NewsItem[]> => {
       title: "Salmonella Outbreak Affects Major Wheat Suppliers",
       description: "Health authorities report contamination in wheat supplies from key producing regions...",
       publishedAt: "2024-02-20",
-      url: "#",
+      url: "https://www.foodsafetynews.com/",
       category: "disease",
       priority: "high"
     },
@@ -27,7 +27,7 @@ const fetchNews = async (): Promise<NewsItem[]> => {
       title: "New Import Regulations for EU Food Markets",
       description: "European Union announces stricter requirements for food imports starting next quarter...",
       publishedAt: "2024-02-19",
-      url: "#",
+      url: "https://ec.europa.eu/food/safety_en",
       category: "regulation",
       priority: "medium"
     },
@@ -35,7 +35,7 @@ const fetchNews = async (): Promise<NewsItem[]> => {
       title: "Drought Conditions Affect South American Crops",
       description: "Severe weather patterns impact agricultural production in key growing regions...",
       publishedAt: "2024-02-18",
-      url: "#",
+      url: "https://www.fao.org/news/en/",
       category: "disaster",
       priority: "high"
     }
@@ -72,7 +72,7 @@ export function NewsFeed() {
               <div key={index} className="border-b last:border-0 pb-4 last:pb-0">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-semibold hover:text-primary">
-                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                       {item.title}
                     </a>
                   </h3>

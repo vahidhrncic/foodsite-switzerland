@@ -113,10 +113,16 @@ export function SupplyChainMap() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="relative">
-          <div className="aspect-[16/9] bg-slate-100 rounded-lg p-4 relative">
+        <div className="relative w-full">
+          <div className="aspect-[16/9] bg-slate-100 rounded-lg p-4 relative overflow-hidden">
             {/* World Map Background */}
-            <div className="absolute inset-0 bg-[url('https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries-sans-antarctica.svg')] bg-no-repeat bg-contain bg-center opacity-20" />
+            <div 
+              className="absolute inset-0 bg-[url('https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.svg')] bg-no-repeat bg-contain bg-center opacity-30"
+              style={{ 
+                transform: 'scale(1.2)',
+                filter: 'grayscale(1)'
+              }}
+            />
             
             {/* Map Markers */}
             {regions.map((region) => (
