@@ -57,14 +57,14 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
   const markerIcon = L.divIcon({
+    className: '',
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
       region.status === 'warning' ? '#fde047' : 
       '#fca5a5'
     }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white;"></div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    className: ''
+    iconSize: L.point(30, 30),
+    iconAnchor: L.point(15, 15)
   });
 
   return (
