@@ -1,13 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { MapMarker } from './map/MapMarker';
 import { regions } from './map/regions-data';
 import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
+import { useEffect } from "react";
+
+// This component will set the view once the map is ready
+function SetViewOnMount({ center, zoom }: { center: LatLngExpression, zoom: number }) {
+  const map = useMap();
+  
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, map, zoom]);
+  
+  return null;
+}
 
 export function SupplyChainMap() {
   const center: LatLngExpression = [47, 8];
+  const zoom = 4;
 
   return (
     <Card className="col-span-3">
@@ -20,11 +33,10 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            center={center}
-            zoom={4}
-            scrollWheelZoom={false}
             style={{ height: '100%', width: '100%' }}
+            scrollWheelZoom={false}
           >
+            <SetViewOnMount center={center} zoom={zoom} />
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
