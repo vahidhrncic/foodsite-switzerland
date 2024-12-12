@@ -24,6 +24,9 @@ export function SupplyChainMap() {
             zoom={4}
             scrollWheelZoom={false}
             style={{ height: '100%', width: '100%' }}
+            whenCreated={(map) => {
+              map.setView(center, 4);
+            }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
