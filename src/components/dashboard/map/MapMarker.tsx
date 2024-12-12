@@ -56,7 +56,7 @@ interface MapMarkerProps {
 export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
-  const markerIcon = L.divIcon({
+  const customIcon = L.divIcon({
     className: '',
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
@@ -70,7 +70,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
   return (
     <Marker 
       position={position}
-      icon={markerIcon}
+      icon={customIcon}
     >
       <Popup>
         <div className="p-2 max-w-xs">
