@@ -137,7 +137,7 @@ export function SupplyChainMap() {
                         {region.resources.map((resource) => (
                           <li key={resource.name} className="mt-1">
                             {resource.name}
-                            <Badge className={getAvailabilityColor(resource.availability)} className="ml-2">
+                            <Badge className={`ml-2 ${getAvailabilityColor(resource.availability)}`}>
                               {resource.availability}
                             </Badge>
                           </li>
