@@ -16,8 +16,8 @@ export const MapMarker = ({ region, position }: MapMarkerProps) => {
       region.status === 'warning' ? '#fde047' : 
       '#fca5a5'
     }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white;"></div>`,
-    iconSize: new L.Point(30, 30),
-    iconAnchor: new L.Point(15, 15)
+    iconSize: L.point(30, 30),
+    iconAnchor: L.point(15, 15)
   });
 
   return (
@@ -25,7 +25,9 @@ export const MapMarker = ({ region, position }: MapMarkerProps) => {
       position={position} 
       icon={customIcon}
     >
-      <MarkerPopup region={region} />
+      <Popup>
+        <MarkerPopup region={region} />
+      </Popup>
     </Marker>
   );
 };
