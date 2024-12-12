@@ -1,25 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Package, Truck, Globe } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Scale } from "lucide-react";
 
 export function RealtimeMetrics() {
   const metrics = [
     {
-      title: "Active Shipments",
-      value: "1,234",
-      icon: <Truck className="h-4 w-4 text-primary-light" />,
-      description: "23% increase from last month",
+      title: "Schweizer Agrar- und Lebensmittelimporte",
+      value: "12.8 Mrd. CHF",
+      icon: <ArrowDownRight className="h-4 w-4 text-primary-light" />,
+      description: "Importwert 2022 (Quelle: BLW)",
     },
     {
-      title: "Inventory Items",
-      value: "12,345",
-      icon: <Package className="h-4 w-4 text-primary-light" />,
-      description: "5% decrease from last week",
+      title: "Schweizer Agrar- und Lebensmittelexporte",
+      value: "9.8 Mrd. CHF",
+      icon: <ArrowUpRight className="h-4 w-4 text-primary-light" />,
+      description: "Exportwert 2022 (Quelle: BLW)",
     },
     {
-      title: "Global Suppliers",
-      value: "89",
-      icon: <Globe className="h-4 w-4 text-primary-light" />,
-      description: "Active in 15 countries",
+      title: "Selbstversorgungsgrad",
+      value: "54%",
+      icon: <Scale className="h-4 w-4 text-primary-light" />,
+      description: "Netto 2022 (Quelle: Agristat)",
     },
   ];
 
