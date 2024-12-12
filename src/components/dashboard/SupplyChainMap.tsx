@@ -4,8 +4,11 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import { MapMarker } from './map/MapMarker';
 import { regions } from './map/regions-data';
 import 'leaflet/dist/leaflet.css';
+import { LatLngExpression } from "leaflet";
 
 export function SupplyChainMap() {
+  const center: LatLngExpression = [47, 8]; // Centered on Switzerland
+
   return (
     <Card className="col-span-3">
       <CardHeader>
@@ -17,7 +20,7 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            center={[47, 8]} // Centered on Switzerland
+            center={center}
             zoom={4}
             scrollWheelZoom={true}
             style={{ height: '100%', width: '100%' }}

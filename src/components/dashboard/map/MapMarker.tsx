@@ -32,9 +32,11 @@ const getAvailabilityColor = (availability: string) => {
 };
 
 export const MapMarker = ({ region }: MapMarkerProps) => {
+  const position: [number, number] = [region.coordinates.y, region.coordinates.x];
+
   return (
     <Marker 
-      position={[region.coordinates.y, region.coordinates.x] as [number, number]}
+      position={position}
       icon={customIcon}
     >
       <Popup>
