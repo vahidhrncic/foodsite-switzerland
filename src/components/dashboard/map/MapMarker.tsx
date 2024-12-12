@@ -56,20 +56,21 @@ interface MapMarkerProps {
 export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
-  const icon = new L.DivIcon({
+  const markerIcon = new L.DivIcon({
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
       region.status === 'warning' ? '#fde047' : 
       '#fca5a5'
     }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white;"></div>`,
     iconSize: [30, 30],
-    iconAnchor: [15, 15]
+    iconAnchor: [15, 15],
+    className: ''
   });
 
   return (
     <Marker 
       position={position}
-      icon={icon}
+      icon={markerIcon}
     >
       <Popup>
         <div className="p-2 max-w-xs">
