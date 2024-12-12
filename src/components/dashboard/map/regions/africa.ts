@@ -2,33 +2,68 @@ import { Region } from '../types';
 
 export const africanRegions: Region[] = [
   {
-    id: "za",
-    name: "Südafrika",
+    id: "et",
+    name: "Äthiopien",
     resources: [
       {
-        name: "Mais",
-        category: "Getreide",
-        production: "12M Tonnen",
-        consumption: "11M Tonnen",
-        trend: "down",
+        name: "Kaffee",
+        category: "Getränke",
+        production: "500.000 Tonnen",
+        consumption: "100.000 Tonnen",
+        trend: "up",
+        availability: "high",
+        tradeRisks: [
+          {
+            type: "logistics",
+            description: "Transportinfrastruktur",
+            severity: "medium"
+          },
+          {
+            type: "political",
+            description: "Regionale Stabilität",
+            severity: "medium"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Traditioneller Anbau", "Klimabedingungen"],
+          demandFactors: ["Globale Nachfrage", "Qualitätsstandards"],
+          priceInfluences: ["Erntequalität", "Transportkosten"]
+        }
+      }
+    ],
+    coordinates: { x: 40.4897, y: 9.1450 },
+    weatherConditions: "Tropisches Hochland",
+    status: "warning",
+    marketImportance: "high"
+  },
+  {
+    id: "ke",
+    name: "Kenia",
+    resources: [
+      {
+        name: "Kaffee",
+        category: "Getränke",
+        production: "50.000 Tonnen",
+        consumption: "5.000 Tonnen",
+        trend: "stable",
         availability: "medium",
         tradeRisks: [
           {
             type: "logistics",
-            description: "Dürrerisiko beeinträchtigt Transportwege",
-            severity: "high"
+            description: "Transportkosten",
+            severity: "medium"
           }
         ],
         marketFactors: {
-          supplyFactors: ["Wetterbedingungen", "Wasserverfügbarkeit"],
-          demandFactors: ["Regionale Nachfrage", "Exportmärkte"],
-          priceInfluences: ["Weltmarktpreise", "Transportkosten"]
+          supplyFactors: ["Qualitätsanbau", "Moderne Verarbeitung"],
+          demandFactors: ["Premiummarkt", "Spezialitätenkaffee"],
+          priceInfluences: ["Qualitätsbewertung", "Weltmarktpreise"]
         }
       }
     ],
-    coordinates: { x: 22.9375, y: -30.5595 },
-    weatherConditions: "Dürreperioden",
-    status: "warning",
+    coordinates: { x: 37.9062, y: 0.0236 },
+    weatherConditions: "Tropisches Hochland",
+    status: "good",
     marketImportance: "medium"
   }
 ];

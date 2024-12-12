@@ -22,9 +22,8 @@ export function SupplyChainMap() {
           <MapContainer
             center={center}
             zoom={4}
-            scrollWheelZoom={true}
+            scrollWheelZoom={false}
             style={{ height: '100%', width: '100%' }}
-            className="z-0"
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
