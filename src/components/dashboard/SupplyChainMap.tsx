@@ -17,7 +17,7 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] rounded-lg overflow-hidden">
           <MapContainer
-            center={[20, 0]}
+            center={[20, 0] as [number, number]}
             zoom={2}
             style={{ height: '100%', width: '100%' }}
             className="z-0"
