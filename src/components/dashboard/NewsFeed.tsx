@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Newspaper, AlertTriangle, ExternalLink, Rss } from "lucide-react";
+import { Rss, ExternalLink, AlertTriangle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
+import { format, isAfter, subDays } from "date-fns";
 import { de } from "date-fns/locale";
 
 interface NewsItem {
