@@ -7,6 +7,7 @@ export const regions: Region[] = [
     resources: [
       {
         name: "Getreide",
+        category: "Getreide",
         production: "450.000 Tonnen",
         consumption: "480.000 Tonnen",
         trend: "stable",
@@ -14,14 +15,24 @@ export const regions: Region[] = [
       },
       {
         name: "Milchprodukte",
+        category: "Milchprodukte",
         production: "3.4M Tonnen",
         consumption: "2.8M Tonnen",
         trend: "up",
         availability: "high"
+      },
+      {
+        name: "Kartoffeln",
+        category: "Gemüse",
+        production: "400.000 Tonnen",
+        consumption: "350.000 Tonnen",
+        trend: "stable",
+        availability: "high"
       }
     ],
     coordinates: { x: 8.2275, y: 46.8182 },
-    weatherConditions: "Normale saisonale Bedingungen"
+    weatherConditions: "Normale saisonale Bedingungen",
+    status: "good"
   },
   {
     id: "de",
@@ -29,21 +40,24 @@ export const regions: Region[] = [
     resources: [
       {
         name: "Weizen",
+        category: "Getreide",
         production: "22M Tonnen",
         consumption: "20M Tonnen",
         trend: "stable",
-        availability: "high"
+        availability: "medium"
       },
       {
         name: "Kartoffeln",
+        category: "Gemüse",
         production: "10M Tonnen",
         consumption: "9M Tonnen",
-        trend: "stable",
-        availability: "high"
+        trend: "down",
+        availability: "medium"
       }
     ],
     coordinates: { x: 10.4515, y: 51.1657 },
-    weatherConditions: "Gemischte Wetterbedingungen"
+    weatherConditions: "Gemischte Wetterbedingungen",
+    status: "warning"
   },
   {
     id: "fr",
@@ -51,13 +65,23 @@ export const regions: Region[] = [
     resources: [
       {
         name: "Getreide",
+        category: "Getreide",
         production: "35M Tonnen",
         consumption: "25M Tonnen",
-        trend: "up",
-        availability: "high"
+        trend: "down",
+        availability: "low"
+      },
+      {
+        name: "Wein",
+        category: "Getränke",
+        production: "45M Hektoliter",
+        consumption: "40M Hektoliter",
+        trend: "stable",
+        availability: "medium"
       }
     ],
     coordinates: { x: 2.2137, y: 46.2276 },
-    weatherConditions: "Gute Wachstumsbedingungen"
+    weatherConditions: "Trockenperiode",
+    status: "critical"
   }
 ];
