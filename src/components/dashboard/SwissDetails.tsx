@@ -5,7 +5,10 @@ export function SwissDetails() {
   const swissRegions = [
     {
       name: "Graubünden & Emmental",
-      products: ["Alpkäse-Produktion", "Traditionelle Käseherstellung"],
+      products: [
+        "Alpkäse-Produktion (15'000 Tonnen/Jahr)",
+        "Traditionelle Käseherstellung (25'000 Tonnen/Jahr)"
+      ],
       type: "Milchprodukte",
       marketFactors: {
         trade: ["Export nach EU", "Hohe Nachfrage in Asien"],
@@ -20,7 +23,10 @@ export function SwissDetails() {
     },
     {
       name: "Mittelland, Waadt & Freiburg",
-      products: ["Hauptanbaugebiet für Weizen", "Bedeutende Getreideflächen"],
+      products: [
+        "Hauptanbaugebiet für Weizen (300'000 Tonnen/Jahr)",
+        "Bedeutende Getreideflächen (180'000 Tonnen/Jahr)"
+      ],
       type: "Getreide",
       marketFactors: {
         trade: ["Import aus EU und Kanada", "Regionale Verteilung"],
@@ -35,7 +41,11 @@ export function SwissDetails() {
     },
     {
       name: "St. Gallen, Luzern & Bern",
-      products: ["Schweinezucht", "Geflügelproduktion", "Rinderhaltung"],
+      products: [
+        "Schweinezucht (250'000 Tonnen/Jahr)",
+        "Geflügelproduktion (100'000 Tonnen/Jahr)",
+        "Rinderhaltung (135'000 Tonnen/Jahr)"
+      ],
       type: "Fleisch",
       marketFactors: {
         trade: ["Lokaler Konsum", "EU-Export"],
@@ -50,7 +60,11 @@ export function SwissDetails() {
     },
     {
       name: "Seeland, Wallis & Thurgau",
-      products: ["Gemüseanbau", "Spezialkulturen", "Gewächshäuser"],
+      products: [
+        "Gemüseanbau (320'000 Tonnen/Jahr)",
+        "Spezialkulturen (45'000 Tonnen/Jahr)",
+        "Gewächshäuser (80'000 Tonnen/Jahr)"
+      ],
       type: "Gemüse",
       marketFactors: {
         trade: ["Saisonaler Import", "EU-Handel"],
@@ -65,7 +79,11 @@ export function SwissDetails() {
     },
     {
       name: "Wallis, Thurgau & Waadt",
-      products: ["Aprikosen", "Äpfel", "Diverse Obstkulturen"],
+      products: [
+        "Aprikosen (4'500 Tonnen/Jahr)",
+        "Äpfel (125'000 Tonnen/Jahr)",
+        "Diverse Obstkulturen (90'000 Tonnen/Jahr)"
+      ],
       type: "Früchte",
       marketFactors: {
         trade: ["Regionale Vermarktung", "Saisonaler Import"],
