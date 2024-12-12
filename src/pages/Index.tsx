@@ -1,5 +1,6 @@
 import { RealtimeMetrics } from "@/components/dashboard/RealtimeMetrics";
 import { SupplyChainMap } from "@/components/dashboard/SupplyChainMap";
+import { NewsFeed } from "@/components/dashboard/NewsFeed";
 
 const Index = () => {
   return (
@@ -15,8 +16,9 @@ const Index = () => {
 
       <div className="space-y-6">
         <RealtimeMetrics />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <SupplyChainMap />
+          <NewsFeed />
         </div>
       </div>
     </div>
