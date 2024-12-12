@@ -56,7 +56,7 @@ interface MapMarkerProps {
 export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
-  const markerIcon = new L.DivIcon({
+  const markerIcon = L.divIcon({
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
       region.status === 'warning' ? '#fde047' : 

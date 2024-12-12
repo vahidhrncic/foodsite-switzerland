@@ -20,12 +20,13 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            center={center}
             zoom={4}
             scrollWheelZoom={false}
             style={{ height: '100%', width: '100%' }}
-            whenCreated={(map) => {
-              map.setView(center, 4);
+            ref={(map) => {
+              if (map) {
+                map.setView(center, 4);
+              }
             }}
           >
             <TileLayer
