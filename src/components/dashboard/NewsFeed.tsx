@@ -13,31 +13,31 @@ interface NewsItem {
 }
 
 const fetchNews = async (): Promise<NewsItem[]> => {
-  // Simulated news data - in a real application, this would fetch from a news API
+  // Simulierte Nachrichtendaten - in einer realen Anwendung würde dies von einer News-API abgerufen
   return [
     {
-      title: "Salmonella Outbreak Affects Major Wheat Suppliers",
-      description: "Health authorities report contamination in wheat supplies from key producing regions...",
+      title: "Neue Richtlinien für Lebensmittelsicherheit in der Schweiz",
+      description: "Das Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV hat neue Richtlinien veröffentlicht...",
       publishedAt: "2024-02-20",
-      url: "https://www.foodsafetynews.com/",
-      category: "disease",
+      url: "https://www.blv.admin.ch/",
+      category: "regulation",
       priority: "high"
     },
     {
-      title: "New Import Regulations for EU Food Markets",
-      description: "European Union announces stricter requirements for food imports starting next quarter...",
+      title: "Schweizer Milchproduktion erreicht Rekordhöhe",
+      description: "Die Schweizer Milchbauern verzeichnen eine Rekordproduktion im letzten Quartal...",
       publishedAt: "2024-02-19",
-      url: "https://ec.europa.eu/food/safety_en",
-      category: "regulation",
+      url: "https://www.swissmilk.ch/de/",
+      category: "market",
       priority: "medium"
     },
     {
-      title: "Drought Conditions Affect South American Crops",
-      description: "Severe weather patterns impact agricultural production in key growing regions...",
+      title: "Getreidepreise: Aktuelle Entwicklungen",
+      description: "Analyse der aktuellen Marktlage für Getreide in der Schweiz und Europa...",
       publishedAt: "2024-02-18",
-      url: "https://www.fao.org/news/en/",
-      category: "disaster",
-      priority: "high"
+      url: "https://www.fenaco.com/de",
+      category: "market",
+      priority: "medium"
     }
   ];
 };
@@ -49,6 +49,13 @@ const categoryColors = {
   market: "bg-green-100 text-green-800"
 };
 
+const categoryLabels = {
+  disease: "Krankheit",
+  regulation: "Regulierung",
+  disaster: "Katastrophe",
+  market: "Markt"
+};
+
 export function NewsFeed() {
   const { data: news = [], isLoading } = useQuery({
     queryKey: ['food-news'],
@@ -56,17 +63,17 @@ export function NewsFeed() {
   });
 
   return (
-    <Card>
+    <Card className="lg:col-span-1">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Newspaper className="h-5 w-5" />
-          Food Industry Alerts
+          Lebensmittel-Nachrichten
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {isLoading ? (
-            <p className="text-muted-foreground">Loading news...</p>
+            <p className="text-muted-foreground">Nachrichten werden geladen...</p>
           ) : (
             news.map((item, index) => (
               <div key={index} className="border-b last:border-0 pb-4 last:pb-0">
@@ -82,12 +89,12 @@ export function NewsFeed() {
                 </div>
                 <div className="mt-1 mb-2">
                   <Badge className={categoryColors[item.category]}>
-                    {item.category}
+                    {categoryLabels[item.category]}
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">{item.description}</p>
                 <span className="text-xs text-muted-foreground mt-2 block">
-                  {new Date(item.publishedAt).toLocaleDateString()}
+                  {new Date(item.publishedAt).toLocaleDateString('de-CH')}
                 </span>
               </div>
             ))

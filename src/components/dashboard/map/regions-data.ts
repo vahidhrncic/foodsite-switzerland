@@ -2,69 +2,62 @@ import { Region } from './types';
 
 export const regions: Region[] = [
   {
-    id: "eu",
-    name: "European Union",
+    id: "ch",
+    name: "Schweiz",
     resources: [
       {
-        name: "Wheat",
-        production: "135M tons",
-        consumption: "120M tons",
+        name: "Getreide",
+        production: "450.000 Tonnen",
+        consumption: "480.000 Tonnen",
         trend: "stable",
         availability: "high"
       },
       {
-        name: "Dairy",
-        production: "155M tons",
-        consumption: "145M tons",
+        name: "Milchprodukte",
+        production: "3.4M Tonnen",
+        consumption: "2.8M Tonnen",
         trend: "up",
         availability: "high"
       }
     ],
-    coordinates: { x: 15, y: 50 },
-    weatherConditions: "Normal seasonal conditions"
+    coordinates: { x: 8.2275, y: 46.8182 },
+    weatherConditions: "Normale saisonale Bedingungen"
   },
   {
-    id: "na",
-    name: "North America",
+    id: "de",
+    name: "Deutschland",
     resources: [
       {
-        name: "Corn",
-        production: "360M tons",
-        consumption: "310M tons",
+        name: "Weizen",
+        production: "22M Tonnen",
+        consumption: "20M Tonnen",
+        trend: "stable",
+        availability: "high"
+      },
+      {
+        name: "Kartoffeln",
+        production: "10M Tonnen",
+        consumption: "9M Tonnen",
+        trend: "stable",
+        availability: "high"
+      }
+    ],
+    coordinates: { x: 10.4515, y: 51.1657 },
+    weatherConditions: "Gemischte Wetterbedingungen"
+  },
+  {
+    id: "fr",
+    name: "Frankreich",
+    resources: [
+      {
+        name: "Getreide",
+        production: "35M Tonnen",
+        consumption: "25M Tonnen",
         trend: "up",
         availability: "high"
-      },
-      {
-        name: "Soybeans",
-        production: "120M tons",
-        consumption: "60M tons",
-        trend: "stable",
-        availability: "medium"
       }
     ],
-    coordinates: { x: -100, y: 40 },
-    weatherConditions: "Drought in midwest regions"
-  },
-  {
-    id: "sa",
-    name: "South America",
-    resources: [
-      {
-        name: "Coffee",
-        production: "85M tons",
-        consumption: "25M tons",
-        trend: "down",
-        availability: "medium"
-      },
-      {
-        name: "Sugar",
-        production: "45M tons",
-        consumption: "30M tons",
-        trend: "stable",
-        availability: "high"
-      }
-    ],
-    coordinates: { x: -60, y: -15 },
-    weatherConditions: "Heavy rainfall affecting harvests"
+    coordinates: { x: 2.2137, y: 46.2276 },
+    weatherConditions: "Gute Wachstumsbedingungen"
   }
 ];

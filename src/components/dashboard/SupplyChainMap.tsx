@@ -11,20 +11,19 @@ export function SupplyChainMap() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <MapPin className="h-5 w-5" />
-          Global Resource Map
+          Globale Ressourcenkarte
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="w-full h-[400px] rounded-lg overflow-hidden">
+        <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            center={[20, 0] as [number, number]}
-            zoom={2}
-            scrollWheelZoom={false}
+            center={[47, 8]} // Centered on Switzerland
+            zoom={4}
+            scrollWheelZoom={true}
             style={{ height: '100%', width: '100%' }}
             className="z-0"
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {regions.map((region) => (

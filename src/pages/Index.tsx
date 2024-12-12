@@ -7,10 +7,10 @@ const Index = () => {
     <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-          Supply Chain Intelligence
+          Lebensmittelversorgung Übersicht
         </h1>
         <p className="text-gray-600">
-          Real-time monitoring and analysis of global food supply chains
+          Echtzeit-Monitoring und Analyse globaler Lebensmittelversorgungsketten
         </p>
       </div>
 
