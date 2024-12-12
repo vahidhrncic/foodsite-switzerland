@@ -45,7 +45,7 @@ interface MapMarkerProps {
 export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
-  const customIcon = L.divIcon({
+  const customIcon = new L.DivIcon({
     className: 'custom-div-icon',
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
@@ -64,7 +64,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
       <Popup>
         <div className="p-2 max-w-xs">
           <h3 className="font-semibold text-lg mb-2">{region.name}</h3>
-          <Badge className={getStatusColor(region.status)} variant="secondary">
+          <Badge variant="secondary" className={getStatusColor(region.status)}>
             {region.status === 'good' ? 'Gute Versorgung' : 
              region.status === 'warning' ? 'Eingeschränkte Versorgung' : 
              'Kritische Versorgung'}
