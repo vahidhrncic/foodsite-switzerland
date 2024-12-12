@@ -19,8 +19,8 @@ export const americanRegions: Region[] = [
             severity: "high"
           },
           {
-            type: "weather",
-            description: "Frostrisiko",
+            type: "logistics",
+            description: "Frostrisiko beeinträchtigt Transport",
             severity: "medium"
           }
         ],

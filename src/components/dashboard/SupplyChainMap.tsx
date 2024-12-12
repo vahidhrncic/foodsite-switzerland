@@ -20,7 +20,7 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            center={center}
+            defaultCenter={center}
             zoom={4}
             scrollWheelZoom={true}
             style={{ height: '100%', width: '100%' }}

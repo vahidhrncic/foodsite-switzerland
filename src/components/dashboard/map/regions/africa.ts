@@ -14,8 +14,8 @@ export const africanRegions: Region[] = [
         availability: "medium",
         tradeRisks: [
           {
-            type: "weather",
-            description: "Dürrerisiko",
+            type: "logistics",
+            description: "Dürrerisiko beeinträchtigt Transportwege",
             severity: "high"
           }
         ],
