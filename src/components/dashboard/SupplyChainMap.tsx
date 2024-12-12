@@ -114,40 +114,43 @@ export function SupplyChainMap() {
       </CardHeader>
       <CardContent>
         <div className="relative">
-          <div className="aspect-[16/9] bg-slate-100 rounded-lg p-4">
-            <div className="absolute inset-0 flex items-center justify-center">
-              {regions.map((region) => (
-                <div
-                  key={region.id}
-                  className="absolute cursor-pointer group"
-                  style={{
-                    left: `${region.coordinates.x}%`,
-                    top: `${region.coordinates.y}%`
-                  }}
-                  onClick={() => setSelectedRegion(region)}
-                >
-                  <div className="p-2 bg-primary rounded-full hover:scale-110 transition-transform">
-                    <Wheat className="h-4 w-4 text-white" />
-                  </div>
-                  <div className="hidden group-hover:block absolute z-10 bg-white p-3 rounded-lg shadow-lg -translate-x-1/2 mt-2 w-48">
-                    <h4 className="font-semibold">{region.name}</h4>
-                    <div className="mt-2">
-                      <p className="text-sm font-medium">Key Resources:</p>
-                      <ul className="text-sm text-muted-foreground">
-                        {region.resources.map((resource) => (
-                          <li key={resource.name} className="mt-1">
-                            {resource.name}
-                            <Badge className={`ml-2 ${getAvailabilityColor(resource.availability)}`}>
-                              {resource.availability}
-                            </Badge>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+          <div className="aspect-[16/9] bg-slate-100 rounded-lg p-4 relative">
+            {/* World Map Background */}
+            <div className="absolute inset-0 bg-[url('https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries-sans-antarctica.svg')] bg-no-repeat bg-contain bg-center opacity-20" />
+            
+            {/* Map Markers */}
+            {regions.map((region) => (
+              <div
+                key={region.id}
+                className="absolute cursor-pointer group"
+                style={{
+                  left: `${region.coordinates.x}%`,
+                  top: `${region.coordinates.y}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
+                onClick={() => setSelectedRegion(region)}
+              >
+                <div className="p-2 bg-primary rounded-full hover:scale-110 transition-transform">
+                  <Wheat className="h-4 w-4 text-white" />
+                </div>
+                <div className="hidden group-hover:block absolute z-10 bg-white p-3 rounded-lg shadow-lg -translate-x-1/2 mt-2 w-48">
+                  <h4 className="font-semibold">{region.name}</h4>
+                  <div className="mt-2">
+                    <p className="text-sm font-medium">Key Resources:</p>
+                    <ul className="text-sm text-muted-foreground">
+                      {region.resources.map((resource) => (
+                        <li key={resource.name} className="mt-1">
+                          {resource.name}
+                          <Badge className={`ml-2 ${getAvailabilityColor(resource.availability)}`}>
+                            {resource.availability}
+                          </Badge>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
           
           {selectedRegion && (
