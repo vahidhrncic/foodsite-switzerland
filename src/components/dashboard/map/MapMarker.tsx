@@ -1,8 +1,8 @@
 import { Marker, Popup } from 'react-leaflet';
 import { Badge } from "@/components/ui/badge";
-import { Resource, Region } from './types';
+import { Resource, Region, TradeRisk } from './types';
 import L from 'leaflet';
-import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon } from 'lucide-react';
+import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon, AlertTriangle } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const getStatusColor = (status: Region['status']) => {
@@ -38,6 +38,17 @@ const getAvailabilityColor = (availability: Resource['availability']) => {
   }
 };
 
+const getRiskSeverityColor = (severity: TradeRisk['severity']) => {
+  switch (severity) {
+    case 'high':
+      return 'text-red-600';
+    case 'medium':
+      return 'text-yellow-600';
+    case 'low':
+      return 'text-green-600';
+  }
+};
+
 interface MapMarkerProps {
   region: Region;
 }
@@ -45,7 +56,7 @@ interface MapMarkerProps {
 export const MapMarker = ({ region }: MapMarkerProps) => {
   const position: [number, number] = [region.coordinates.y, region.coordinates.x];
 
-  const customIcon = new L.DivIcon({
+  const icon = L.divIcon({
     className: 'custom-div-icon',
     html: `<div style="background-color: ${
       region.status === 'good' ? '#86efac' : 
@@ -59,7 +70,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
   return (
     <Marker 
       position={position}
-      icon={customIcon}
+      icon={icon}
     >
       <Popup>
         <div className="p-2 max-w-xs">
@@ -93,6 +104,25 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
                 <div className="text-sm text-gray-600 mt-1">
                   <div>Produktion: {resource.production}</div>
                   <div>Verbrauch: {resource.consumption}</div>
+                  {resource.tradeRisks && resource.tradeRisks.length > 0 && (
+                    <div className="mt-2">
+                      <div className="font-medium mb-1">Handelsrisiken:</div>
+                      {resource.tradeRisks.map((risk, index) => (
+                        <div key={index} className="flex items-center gap-1">
+                          <AlertTriangle className={`h-4 w-4 ${getRiskSeverityColor(risk.severity)}`} />
+                          <span>{risk.description}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {resource.marketFactors && (
+                    <div className="mt-2">
+                      <div className="font-medium">Marktfaktoren:</div>
+                      <div className="text-xs">
+                        {resource.marketFactors.priceInfluences.join(', ')}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

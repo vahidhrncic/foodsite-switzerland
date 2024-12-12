@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
 
 export function SupplyChainMap() {
-  const defaultCenter: LatLngExpression = [47, 8];
+  const center: LatLngExpression = [47, 8];
 
   return (
     <Card className="col-span-3">
@@ -20,7 +20,7 @@ export function SupplyChainMap() {
       <CardContent>
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
-            defaultCenter={defaultCenter}
+            center={center}
             zoom={4}
             scrollWheelZoom={true}
             style={{ height: '100%', width: '100%' }}

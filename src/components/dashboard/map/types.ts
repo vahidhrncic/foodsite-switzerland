@@ -10,6 +10,18 @@ export type FoodCategory =
   | 'Fette'
   | 'Getränke';
 
+export type TradeRisk = {
+  type: 'price' | 'logistics' | 'political' | 'currency';
+  description: string;
+  severity: 'low' | 'medium' | 'high';
+};
+
+export type MarketFactors = {
+  supplyFactors: string[];
+  demandFactors: string[];
+  priceInfluences: string[];
+};
+
 export interface Resource {
   name: string;
   category: FoodCategory;
@@ -17,6 +29,13 @@ export interface Resource {
   consumption: string;
   trend: 'up' | 'down' | 'stable';
   availability: 'high' | 'medium' | 'low';
+  tradeRisks: TradeRisk[];
+  marketFactors: MarketFactors;
+  tradingPrice?: {
+    value: number;
+    currency: string;
+    trend: 'up' | 'down' | 'stable';
+  };
 }
 
 export interface Region {
@@ -26,4 +45,6 @@ export interface Region {
   coordinates: { x: number; y: number };
   weatherConditions?: string;
   status: 'good' | 'warning' | 'critical';
+  tradeRelations?: string[];
+  marketImportance?: 'high' | 'medium' | 'low';
 }
