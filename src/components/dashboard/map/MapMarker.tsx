@@ -4,7 +4,6 @@ import { Resource, Region } from './types';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Create a custom icon for the marker
 const customIcon = new L.Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',

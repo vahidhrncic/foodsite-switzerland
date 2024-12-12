@@ -19,12 +19,13 @@ export function SupplyChainMap() {
           <MapContainer
             center={[20, 0] as [number, number]}
             zoom={2}
+            scrollWheelZoom={false}
             style={{ height: '100%', width: '100%' }}
             className="z-0"
           >
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {regions.map((region) => (
               <MapMarker key={region.id} region={region} />
