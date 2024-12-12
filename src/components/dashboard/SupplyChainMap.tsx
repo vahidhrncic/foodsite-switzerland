@@ -34,7 +34,7 @@ export function SupplyChainMap() {
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
             style={{ height: '100%', width: '100%' }}
-            scrollWheelZoom={false}
+            zoomControl={true}
           >
             <SetViewOnMount center={center} zoom={zoom} />
             <TileLayer
