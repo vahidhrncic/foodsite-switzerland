@@ -7,7 +7,6 @@ import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
 import { useEffect } from "react";
 
-// This component will set the view once the map is ready
 function SetViewOnMount({ center, zoom }: { center: LatLngExpression, zoom: number }) {
   const map = useMap();
   
@@ -34,7 +33,6 @@ export function SupplyChainMap() {
         <div className="w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
           <MapContainer
             style={{ height: '100%', width: '100%' }}
-            zoomControl={true}
           >
             <SetViewOnMount center={center} zoom={zoom} />
             <TileLayer

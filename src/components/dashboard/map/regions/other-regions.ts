@@ -180,5 +180,185 @@ export const otherRegions: Region[] = [
     weatherConditions: "Kontinentalklima",
     status: "good",
     marketImportance: "medium"
+  },
+  {
+    id: "ar",
+    name: "Argentinien",
+    resources: [
+      {
+        name: "Rindfleisch",
+        category: "Fleisch",
+        production: "3.1M Tonnen/Jahr",
+        consumption: "2.4M Tonnen/Jahr",
+        trend: "up",
+        availability: "high",
+        tradeRisks: [
+          {
+            type: "currency",
+            description: "Währungsvolatilität",
+            severity: "high"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Extensive Weidehaltung", "Qualitätszucht"],
+          demandFactors: ["Premium-Fleischmarkt", "Export-Nachfrage"],
+          priceInfluences: ["Weltmarktpreise", "Währungskurs"]
+        }
+      }
+    ],
+    coordinates: { x: -63.6167, y: -38.4161 },
+    weatherConditions: "Gemäßigtes Klima",
+    status: "good",
+    marketImportance: "high"
+  },
+  {
+    id: "ie",
+    name: "Irland",
+    resources: [
+      {
+        name: "Milchprodukte",
+        category: "Milchprodukte",
+        production: "8.3M Tonnen/Jahr",
+        consumption: "1M Tonnen/Jahr",
+        trend: "up",
+        availability: "high",
+        tradeRisks: [
+          {
+            type: "logistics",
+            description: "Transportketten",
+            severity: "low"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Grünlandwirtschaft", "Moderne Verarbeitung"],
+          demandFactors: ["EU-Markt", "Qualitätsprodukte"],
+          priceInfluences: ["EU-Marktpreise", "Nachfrage"]
+        }
+      }
+    ],
+    coordinates: { x: -8.2439, y: 53.4129 },
+    weatherConditions: "Maritimes Klima",
+    status: "good",
+    marketImportance: "medium"
+  },
+  {
+    id: "au",
+    name: "Australien",
+    resources: [
+      {
+        name: "Weizen",
+        category: "Getreide",
+        production: "33M Tonnen/Jahr",
+        consumption: "8M Tonnen/Jahr",
+        trend: "stable",
+        availability: "high",
+        tradeRisks: [
+          {
+            type: "logistics",
+            description: "Lange Transportwege",
+            severity: "medium"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Große Anbauflächen", "Moderne Landwirtschaft"],
+          demandFactors: ["Asiatischer Markt", "Exportqualität"],
+          priceInfluences: ["Weltmarktpreise", "Wetterbedingungen"]
+        }
+      }
+    ],
+    coordinates: { x: 133.7751, y: -25.2744 },
+    weatherConditions: "Verschiedene Klimazonen",
+    status: "good",
+    marketImportance: "high"
+  },
+  {
+    id: "ca",
+    name: "Kanada",
+    resources: [
+      {
+        name: "Raps",
+        category: "Ölsaaten",
+        production: "19M Tonnen/Jahr",
+        consumption: "10M Tonnen/Jahr",
+        trend: "up",
+        availability: "high",
+        tradeRisks: [
+          {
+            type: "logistics",
+            description: "Transportinfrastruktur",
+            severity: "low"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Große Anbauflächen", "Moderne Technologie"],
+          demandFactors: ["Globale Nachfrage", "Bioenergie"],
+          priceInfluences: ["Ölpreise", "Ernteerträge"]
+        }
+      }
+    ],
+    coordinates: { x: -106.3468, y: 56.1304 },
+    weatherConditions: "Kontinentalklima",
+    status: "good",
+    marketImportance: "high"
+  },
+  {
+    id: "ba",
+    name: "Bosnien & Herzegowina",
+    resources: [
+      {
+        name: "Himbeeren",
+        category: "Früchte",
+        production: "25.000 Tonnen/Jahr",
+        consumption: "5.000 Tonnen/Jahr",
+        trend: "up",
+        availability: "medium",
+        tradeRisks: [
+          {
+            type: "logistics",
+            description: "Kühlkette",
+            severity: "medium"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Kleinbauernwirtschaft", "Günstige Klimabedingungen"],
+          demandFactors: ["EU-Markt", "Bio-Qualität"],
+          priceInfluences: ["Saisonalität", "Transportkosten"]
+        }
+      }
+    ],
+    coordinates: { x: 17.6791, y: 43.9159 },
+    weatherConditions: "Kontinentalklima",
+    status: "good",
+    marketImportance: "medium"
+  },
+  {
+    id: "hr",
+    name: "Kroatien",
+    resources: [
+      {
+        name: "Olivenöl",
+        category: "Fette",
+        production: "50.000 Tonnen/Jahr",
+        consumption: "30.000 Tonnen/Jahr",
+        trend: "up",
+        availability: "medium",
+        tradeRisks: [
+          {
+            type: "price",
+            description: "Saisonale Schwankungen",
+            severity: "medium"
+          }
+        ],
+        marketFactors: {
+          supplyFactors: ["Traditionelle Produktion", "Küstenregionen"],
+          demandFactors: ["EU-Markt", "Premium-Segment"],
+          priceInfluences: ["Ernteertrag", "Qualitätsbewertung"]
+        }
+      }
+    ],
+    coordinates: { x: 15.2000, y: 45.1000 },
+    weatherConditions: "Mediterranes Klima",
+    status: "good",
+    marketImportance: "medium"
   }
 ];
