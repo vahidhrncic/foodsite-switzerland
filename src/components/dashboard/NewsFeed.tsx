@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { supabase } from "@/integrations/supabase/client";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface NewsItem {
   title: string;
@@ -69,55 +70,57 @@ export function NewsFeed() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
-          {isLoading ? (
-            <p className="text-muted-foreground">Nachrichten werden geladen...</p>
-          ) : error ? (
-            <p className="text-destructive">Fehler beim Laden der Nachrichten</p>
-          ) : news.length === 0 ? (
-            <p className="text-muted-foreground">Keine Nachrichten verfügbar</p>
-          ) : (
-            news.map((item, index) => (
-              <div 
-                key={index} 
-                className="border-b last:border-0 pb-4 last:pb-0 hover:bg-gray-50 transition-colors p-3 rounded-lg"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <h3 className="font-semibold group">
-                      <a 
-                        href={item.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="hover:text-primary flex items-center gap-1"
-                      >
-                        {item.title}
-                        <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    </h3>
+        <ScrollArea className="h-[600px] pr-4">
+          <div className="space-y-4">
+            {isLoading ? (
+              <p className="text-muted-foreground">Nachrichten werden geladen...</p>
+            ) : error ? (
+              <p className="text-destructive">Fehler beim Laden der Nachrichten</p>
+            ) : news.length === 0 ? (
+              <p className="text-muted-foreground">Keine Nachrichten verfügbar</p>
+            ) : (
+              news.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="border-b last:border-0 pb-4 last:pb-0 hover:bg-accent/50 transition-colors p-3 rounded-lg"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1">
+                      <h3 className="font-semibold group">
+                        <a 
+                          href={item.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="hover:text-primary flex items-center gap-1"
+                        >
+                          {item.title}
+                          <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                      </h3>
+                    </div>
+                    {priorityIcons[item.priority]}
                   </div>
-                  {priorityIcons[item.priority]}
+                  
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <Badge variant="secondary" className={categoryColors[item.category]}>
+                      {categoryLabels[item.category]}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {format(new Date(item.publishedAt), 'PPP', { locale: de })}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {item.source}
+                    </Badge>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {item.description}
+                  </p>
                 </div>
-                
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <Badge variant="secondary" className={categoryColors[item.category]}>
-                    {categoryLabels[item.category]}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {format(new Date(item.publishedAt), 'PPP', { locale: de })}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {item.source}
-                  </Badge>
-                </div>
-                
-                <p className="text-sm text-muted-foreground mt-2">
-                  {item.description}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
+        </ScrollArea>
       </CardContent>
     </Card>
   );

@@ -215,12 +215,22 @@ Deno.serve(async (req) => {
   try {
     console.log('Starting food news fetch...');
     
-    // Try to fetch real RSS feeds
+    // Try to fetch real RSS feeds from Swiss food and agriculture sources
     const NEWS_SOURCES = [
       {
         url: 'https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.rss.html',
         name: 'Bundesrat CH',
         category: 'regulation',
+      },
+      {
+        url: 'https://www.blv.admin.ch/blv/de/home.rss.xml',
+        name: 'BLV',
+        category: 'regulation',
+      },
+      {
+        url: 'https://www.agroscope.admin.ch/agroscope/de/home.rss.xml',
+        name: 'Agroscope',
+        category: 'market',
       },
     ];
     
