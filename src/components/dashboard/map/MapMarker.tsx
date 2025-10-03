@@ -17,7 +17,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
       region.status === 'good' ? '#86efac' : 
       region.status === 'warning' ? '#fde047' : 
       '#fca5a5'
-    }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white;"></div>`,
+    }; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
     iconSize: [30, 30],
     iconAnchor: [15, 15]
   });
@@ -25,7 +25,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
   return (
     <Marker 
       position={position}
-      icon={customIcon}
+      {...({ icon: customIcon } as any)}
     >
       <Popup>
         <MarkerPopup region={region} />

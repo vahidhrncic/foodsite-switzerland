@@ -2,8 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Rss, ExternalLink, AlertTriangle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
-import { format, isAfter, subDays } from "date-fns";
+import { format } from "date-fns";
 import { de } from "date-fns/locale";
+import { supabase } from "@/integrations/supabase/client";
 
 interface NewsItem {
   title: string;
@@ -12,36 +13,23 @@ interface NewsItem {
   url: string;
   category: 'disease' | 'regulation' | 'disaster' | 'market';
   priority: 'high' | 'medium' | 'low';
+  source: string;
 }
 
 const fetchNews = async (): Promise<NewsItem[]> => {
-  // Simulierte Nachrichtendaten - in einer realen Anwendung würde dies von einer News-API abgerufen
-  return [
-    {
-      title: "Neue Richtlinien für Lebensmittelsicherheit in der Schweiz",
-      description: "Das Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV hat neue Richtlinien veröffentlicht...",
-      publishedAt: "2024-02-20",
-      url: "https://www.blv.admin.ch/",
-      category: "regulation",
-      priority: "high"
-    },
-    {
-      title: "Schweizer Milchproduktion erreicht Rekordhöhe",
-      description: "Die Schweizer Milchbauern verzeichnen eine Rekordproduktion im letzten Quartal...",
-      publishedAt: "2024-02-19",
-      url: "https://www.swissmilk.ch/de/",
-      category: "market",
-      priority: "medium"
-    },
-    {
-      title: "Getreidepreise: Aktuelle Entwicklungen",
-      description: "Analyse der aktuellen Marktlage für Getreide in der Schweiz und Europa...",
-      publishedAt: "2024-02-18",
-      url: "https://www.fenaco.com/de",
-      category: "market",
-      priority: "medium"
+  try {
+    const { data, error } = await supabase.functions.invoke('fetch-food-news');
+    
+    if (error) {
+      console.error('Error fetching news:', error);
+      return [];
     }
-  ];
+    
+    return data?.news || [];
+  } catch (error) {
+    console.error('Error in fetchNews:', error);
+    return [];
+  }
 };
 
 const categoryColors = {
@@ -65,9 +53,11 @@ const priorityIcons = {
 };
 
 export function NewsFeed() {
-  const { data: news = [], isLoading } = useQuery({
+  const { data: news = [], isLoading, error } = useQuery({
     queryKey: ['food-news'],
     queryFn: fetchNews,
+    refetchInterval: 300000, // Refresh every 5 minutes
+    staleTime: 240000, // Consider data stale after 4 minutes
   });
 
   return (
@@ -82,6 +72,10 @@ export function NewsFeed() {
         <div className="space-y-4">
           {isLoading ? (
             <p className="text-muted-foreground">Nachrichten werden geladen...</p>
+          ) : error ? (
+            <p className="text-destructive">Fehler beim Laden der Nachrichten</p>
+          ) : news.length === 0 ? (
+            <p className="text-muted-foreground">Keine Nachrichten verfügbar</p>
           ) : (
             news.map((item, index) => (
               <div 
@@ -111,6 +105,9 @@ export function NewsFeed() {
                   </Badge>
                   <Badge variant="outline" className="text-xs">
                     {format(new Date(item.publishedAt), 'PPP', { locale: de })}
+                  </Badge>
+                  <Badge variant="outline" className="text-xs">
+                    {item.source}
                   </Badge>
                 </div>
                 
