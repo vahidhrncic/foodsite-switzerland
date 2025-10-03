@@ -151,24 +151,56 @@ async function parseRSSFeed(url: string, source: string, category: string): Prom
     console.log(`Received ${text.length} characters from ${url}`);
     
     const items: NewsItem[] = [];
-    const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
-    const matches = Array.from(text.matchAll(itemRegex));
+    
+    // Try multiple patterns to match different RSS/Atom formats
+    const itemPatterns = [
+      /<item>([\s\S]*?)<\/item>/gi,
+      /<entry>([\s\S]*?)<\/entry>/gi,
+    ];
+    
+    let matches: RegExpMatchArray[] = [];
+    for (const pattern of itemPatterns) {
+      const found = Array.from(text.matchAll(pattern));
+      if (found.length > 0) {
+        matches = found;
+        break;
+      }
+    }
     
     console.log(`Found ${matches.length} items in feed from ${source}`);
     
     for (const match of matches) {
       const itemXml = match[1];
       
-      const titleMatch = itemXml.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>|<title>(.*?)<\/title>/i);
-      const descriptionMatch = itemXml.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>|<description>(.*?)<\/description>/i);
-      const linkMatch = itemXml.match(/<link>(.*?)<\/link>/i);
-      const pubDateMatch = itemXml.match(/<pubDate>(.*?)<\/pubDate>/i);
+      // Support multiple title formats (CDATA, plain text, and HTML entities)
+      const titleMatch = itemXml.match(/<title[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/is);
+      const descriptionMatch = itemXml.match(/<description[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/description>/is) ||
+                               itemXml.match(/<summary[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/summary>/is) ||
+                               itemXml.match(/<content[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/content>/is);
+      const linkMatch = itemXml.match(/<link[^>]*>([^<]+)<\/link>/i) ||
+                        itemXml.match(/<link[^>]*href=["']([^"']+)["']/i);
+      const pubDateMatch = itemXml.match(/<pubDate>(.*?)<\/pubDate>/i) ||
+                           itemXml.match(/<published>(.*?)<\/published>/i) ||
+                           itemXml.match(/<updated>(.*?)<\/updated>/i) ||
+                           itemXml.match(/<dc:date>(.*?)<\/dc:date>/i);
       
       if (titleMatch && linkMatch) {
-        const title = (titleMatch[1] || titleMatch[2] || '').trim();
-        const description = (descriptionMatch ? (descriptionMatch[1] || descriptionMatch[2] || '') : '').trim();
+        let title = titleMatch[1].trim();
+        let description = (descriptionMatch ? descriptionMatch[1] : '').trim();
         const link = linkMatch[1].trim();
-        const pubDate = pubDateMatch ? new Date(pubDateMatch[1]).toISOString() : new Date().toISOString();
+        
+        // Clean HTML tags from title and description
+        title = title.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        description = description.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        
+        let pubDate = new Date().toISOString();
+        if (pubDateMatch) {
+          try {
+            pubDate = new Date(pubDateMatch[1]).toISOString();
+          } catch (e) {
+            console.error(`Error parsing date: ${pubDateMatch[1]}`);
+          }
+        }
         
         let priority: 'high' | 'medium' | 'low' = 'medium';
         const lowercaseTitle = title.toLowerCase();
@@ -200,6 +232,7 @@ async function parseRSSFeed(url: string, source: string, category: string): Prom
       }
     }
     
+    console.log(`Successfully parsed ${items.length} items from ${source}`);
     return items;
   } catch (error) {
     console.error(`Error parsing RSS feed from ${url}:`, error);
