@@ -225,7 +225,7 @@ async function parseRSSFeed(url: string, source: string, category: string): Prom
           description: description.substring(0, 200) + (description.length > 200 ? '...' : ''),
           publishedAt: pubDate,
           url: link,
-          category: category as any,
+          category: category as NewsItem['category'],
           priority,
           source,
         });

@@ -23,10 +23,7 @@ export const MapMarker = ({ region }: MapMarkerProps) => {
   });
 
   return (
-    <Marker 
-      position={position}
-      {...({ icon: customIcon } as any)}
-    >
+    <Marker position={position} icon={customIcon}>
       <Popup>
         <MarkerPopup region={region} />
       </Popup>

@@ -1,81 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
- 
-    --radius: 0.5rem;
+    --background:          40 20% 97%;
+    --foreground:          25 20% 8%;
+    --card:                0 0% 100%;
+    --card-foreground:     25 20% 8%;
+    --popover:             0 0% 100%;
+    --popover-foreground:  25 20% 8%;
+    --primary:             142 71% 18%;
+    --primary-foreground:  0 0% 100%;
+    --secondary:           40 15% 92%;
+    --secondary-foreground:25 20% 15%;
+    --muted:               40 15% 93%;
+    --muted-foreground:    25 10% 45%;
+    --accent:              0 80% 42%;
+    --accent-foreground:   0 0% 100%;
+    --destructive:         0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border:              40 12% 87%;
+    --input:               40 12% 87%;
+    --ring:                142 71% 18%;
+    --radius:              0.75rem;
+    --header-height:       64px;
+    --bottom-bar-height:   64px;
   }
- 
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
-}
- 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+    --background:          222 25% 10%;
+    --foreground:          40 15% 93%;
+    --card:                222 25% 13%;
+    --card-foreground:     40 15% 93%;
+    --popover:             222 25% 13%;
+    --popover-foreground:  40 15% 93%;
+    --primary:             142 50% 55%;
+    --primary-foreground:  222 25% 8%;
+    --secondary:           222 20% 18%;
+    --secondary-foreground:40 15% 85%;
+    --muted:               222 20% 17%;
+    --muted-foreground:    40 8% 55%;
+    --accent:              0 70% 55%;
+    --accent-foreground:   0 0% 100%;
+    --destructive:         0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border:              222 20% 20%;
+    --input:               222 20% 20%;
+    --ring:                142 50% 55%;
   }
 }
 
+@layer base {
+  * { @apply border-border; }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .stat-number {
+    @apply text-4xl font-extrabold tracking-tight tabular-nums;
+    font-feature-settings: "tnum", "cv02";
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg,
+      hsl(var(--primary) / 0.07) 0%,
+      hsl(var(--background)) 65%
+    );
+  }
+
+  .severity-high   { @apply border-l-4 border-l-red-500 bg-red-50/60 dark:bg-red-950/25; }
+  .severity-medium { @apply border-l-4 border-l-amber-400 bg-amber-50/60 dark:bg-amber-950/20; }
+  .severity-low    { @apply border-l-4 border-l-blue-400; }
+}
+
+/* Leaflet */
 .leaflet-container {
   width: 100%;
   height: 100%;
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px -8px rgba(0,0,0,0.18) !important;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none !important; }
+
+.leaflet-control-zoom {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position:  200% 0; }
+}
+
+.animate-fade-up   { animation: fade-up  0.4s ease both; }
+.animate-fade-in   { animation: fade-in  0.3s ease both; }
+.animate-pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 70ms; }
+.stagger > *:nth-child(3) { animation-delay: 140ms; }
+.stagger > *:nth-child(4) { animation-delay: 210ms; }
+
+/* Bottom bar padding on mobile */
+@media (max-width: 767px) {
+  main { padding-bottom: calc(var(--bottom-bar-height) + env(safe-area-inset-bottom, 0px)); }
 }
